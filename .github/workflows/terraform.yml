@@ -23,15 +23,18 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: Terraform Init
-      run: ./s3_bucket/terraform init
+        - name: Terraform Init
+      run: terraform init
+      working-directory: ./s3_bucket
 
     - name: Terraform Validate
-      run: ./s3_bucket/terraform validate
+      run: terraform validate
+      working-directory: ./s3_bucket
 
     - name: Terraform Plan
-      run: ./s3_bucket/terraform plan
+      run: terraform plan
+      working-directory: ./s3_bucket
 
-    # Uncomment this line if you want Terraform to automatically apply changes
     - name: Terraform Apply
-      run: ./s3_bucket/terraform apply -auto-approve
+      run: terraform apply -auto-approve
+      working-directory: ./s3_bucket
