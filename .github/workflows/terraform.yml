@@ -35,6 +35,6 @@ jobs:
       run: terraform plan
       working-directory: ./s3_bucket
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      working-directory: ./s3_bucket
+#     - name: Terraform Apply
+#       run: terraform apply -auto-approve
+#       working-directory: ./s3_bucket
