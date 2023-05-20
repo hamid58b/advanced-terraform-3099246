@@ -1,0 +1,36 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - 'create_s3_bucket'
+  pull_request:
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: ./s3_bucket/terraform init
+
+    - name: Terraform Validate
+      run: ./s3_bucket/terraform validate
+
+    - name: Terraform Plan
+      run: ./s3_bucket/terraform plan
+
+    # Uncomment this line if you want Terraform to automatically apply changes
+    - name: Terraform Apply
+      run: ./s3_bucket/terraform apply -auto-approve
